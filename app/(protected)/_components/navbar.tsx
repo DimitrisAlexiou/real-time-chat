@@ -43,6 +43,14 @@ export const Navbar = () => {
                         Settings
                     </Link>
                 </Button>
+                <Button
+                    asChild
+                    variant={pathname === '/users' ? 'default' : 'outline'}
+                >
+                    <Link href={'/users'}>
+                        Users
+                    </Link>
+                </Button>
             </div>
             <UserButton />
         </div>

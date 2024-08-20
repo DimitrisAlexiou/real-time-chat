@@ -10,6 +10,7 @@ interface CardWrapperProps {
     headerLabel: string
     backButtonLabel: string
     backButtonHref: string
+    isPending?: boolean
     showSocial?: boolean
 }
 
@@ -18,6 +19,7 @@ export const CardWrapper = ({
     headerLabel,
     backButtonLabel,
     backButtonHref,
+    isPending,
     showSocial
 }: CardWrapperProps) => {
     return (
@@ -30,7 +32,7 @@ export const CardWrapper = ({
             </CardContent>
             {showSocial && (
                 <CardFooter>
-                    <Social />
+                    <Social isPending={isPending} />
                 </CardFooter>
             )}
             <CardFooter>

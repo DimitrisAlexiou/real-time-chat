@@ -46,6 +46,7 @@ export const RegisterForm = () => {
             headerLabel="Create an account"
             backButtonLabel="Already have an account?"
             backButtonHref="/auth/login"
+            isPending={isPending}
             showSocial
         >
             <Form {...form}>

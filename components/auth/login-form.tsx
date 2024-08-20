@@ -65,6 +65,7 @@ export const LoginForm = () => {
             headerLabel="Welcome back"
             backButtonLabel="Don't have an account?"
             backButtonHref="/auth/register"
+            isPending={isPending}
             showSocial
         >
             <Form {...form}>
