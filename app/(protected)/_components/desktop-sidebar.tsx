@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { ExtendedUser } from "@/next-auth";
-import { FaUser } from "react-icons/fa";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useRoutes from "@/hooks/use-routes";
 import DesktopItem from "./desktop-item";
+import AvatarComponent from "./avatar";
 
 interface DesktopSidebarProps {
     user?: ExtendedUser;
@@ -36,13 +35,7 @@ const DesktopSidebar = ({ user }: DesktopSidebarProps) => {
                     onClick={() => setIsOpen(!isOpen)}
                     className="cursor-pointer hover:opacity-75 transition"
                 >
-                    <Avatar>
-                        <AvatarImage src={user?.image || ""} />
-                        <AvatarFallback className="bg-gray-500">
-                            <FaUser className="text-white" />
-                        </AvatarFallback>
-                        <span className="absolute block rounded-full bg-green-500 ring-2 ring-white top-0 right-0 h-2 w-2 md:h-3 md:w-3" />
-                    </Avatar>
+                    <AvatarComponent user={user} />
                 </div>
             </nav>
         </div>

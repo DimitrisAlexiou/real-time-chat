@@ -10,9 +10,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Realtime Chat",
   description: "Realtime messaging app",
-  icons: {
-    icon: "./favicon.ico",
-  },
 };
 
 export default async function RootLayout({
