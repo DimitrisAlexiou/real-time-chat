@@ -1,5 +1,5 @@
 import { ExtendedUser } from '@/next-auth';
-import { Conversation, Message, User } from '@prisma/client';
+import { Conversation, Message } from '@prisma/client';
 
 export type ExtendedMessage = Message & {
 	sender: ExtendedUser;
