@@ -11,7 +11,7 @@ interface DesktopItemProps {
     onClick?: () => void;
 }
 
-const DesktopItem = ({
+export const DesktopItem = ({
     label,
     href,
     icon: Icon,
@@ -35,5 +35,3 @@ const DesktopItem = ({
         </li>
     )
 }
-
-export default DesktopItem;

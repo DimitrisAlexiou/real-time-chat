@@ -9,7 +9,7 @@ interface Iparams {
 export async function POST(request: Request, { params }: { params: Iparams }) {
 	try {
 		const user = await currentUser();
-		const { conversationId } = params;
+		const { conversationId } = await params;
 
 		if (!user?.id || !user?.email)
 			return new NextResponse('Unauthorized', { status: 401 });
@@ -51,9 +51,9 @@ export async function POST(request: Request, { params }: { params: Iparams }) {
 			},
 		});
 
-		return NextResponse.json(updatedMessage);
+		return NextResponse.json(updatedMessage, { status: 200 });
 	} catch (error: any) {
 		console.log(error, 'Error messages seen');
-		return new NextResponse('Internal Server Error', { status: 500 });
+		return new NextResponse('Internal Server Error.', { status: 500 });
 	}
 }

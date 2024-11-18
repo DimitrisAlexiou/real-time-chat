@@ -4,7 +4,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { ExitIcon } from "@radix-ui/react-icons";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { LogoutButton } from "./logout-button";
-import AvatarComponent from "@/app/(protected)/_components/avatar";
+import { AvatarComponent } from "@/app/(protected)/_components/avatar";
 
 export const UserButton = () => {
     const user = useCurrentUser();

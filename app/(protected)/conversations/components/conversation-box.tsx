@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import { format } from 'date-fns';
 import { ExtendedConversation } from "@/types/conversation";
 import { useOtherUser } from "@/hooks/use-other-user";
-import AvatarComponent from "../../_components/avatar";
+import { AvatarComponent } from "../../_components/avatar";
 
 interface ConversationBoxProps {
     data: ExtendedConversation;

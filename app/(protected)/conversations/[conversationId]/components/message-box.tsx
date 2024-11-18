@@ -1,11 +1,11 @@
 'use client';
 
-import AvatarComponent from "@/app/(protected)/_components/avatar";
-import { ExtendedMessage } from "@/types/conversation";
 import clsx from "clsx";
-import { format } from "date-fns";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { format } from "date-fns";
+import { AvatarComponent } from "@/app/(protected)/_components/avatar";
+import { ExtendedMessage } from "@/types/conversation";
 
 interface MessageBoxProps {
     data: ExtendedMessage;

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ExtendedUser } from "@/next-auth";
-import AvatarComponent from '../../_components/avatar';
+import { AvatarComponent } from '../../_components/avatar';
 
 interface UserBoxProps {
     data: ExtendedUser;

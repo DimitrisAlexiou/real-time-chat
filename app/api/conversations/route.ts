@@ -81,6 +81,6 @@ export async function POST(request: Request) {
 
 		return NextResponse.json(newConversation, { status: 201 });
 	} catch (error: any) {
-		return new NextResponse('Internal Server Error', { status: 500 });
+		return new NextResponse('Internal Server Error.', { status: 500 });
 	}
 }

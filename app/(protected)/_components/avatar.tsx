@@ -8,7 +8,7 @@ interface AvatarComponentProps {
     user?: ExtendedUser;
 }
 
-const AvatarComponent = ({ user }: AvatarComponentProps) => {
+export const AvatarComponent = ({ user }: AvatarComponentProps) => {
     return (
         <div className="relative inline-block">
             <Avatar className="w-10 h-10">
@@ -23,5 +23,3 @@ const AvatarComponent = ({ user }: AvatarComponentProps) => {
         </div>
     )
 }
-
-export default AvatarComponent;

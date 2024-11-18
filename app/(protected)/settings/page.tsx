@@ -37,23 +37,23 @@ const SettingsPage = () => {
         },
     })
 
-    const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
-        startTransition(() => {
-            settings(values)
-                .then((response) => {
-                    if (response.error) {
-                        setError(response.error);
-                        return;
-                    }
+    // const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
+    //     startTransition(() => {
+    //         settings(values)
+    //             .then((response) => {
+    //                 if (response.error) {
+    //                     setError(response.error);
+    //                     return;
+    //                 }
 
-                    if (response.success) {
-                        update();
-                        setSuccess(response.success);
-                    }
-                })
-                .catch(() => setError('Something went wrong!'))
-        })
-    }
+    //                 if (response.success) {
+    //                     update();
+    //                     setSuccess(response.success);
+    //                 }
+    //             })
+    //             .catch(() => setError('Something went wrong!'))
+    //     })
+    // }
 
     return (
         <Card className="w-[600px]">
@@ -66,7 +66,7 @@ const SettingsPage = () => {
                 <Form {...form}>
                     <form
                         className='space-y-6'
-                        onSubmit={form.handleSubmit(onSubmit)}
+                    // onSubmit={form.handleSubmit(onSubmit)}
                     >
                         <div className='space-y-4'>
                             <FormField

@@ -6,7 +6,7 @@ import { ExtendedUser } from "@/next-auth";
 import { Conversation } from "@prisma/client";
 import { useOtherUser } from "@/hooks/use-other-user";
 import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2";
-import AvatarComponent from "@/app/(protected)/_components/avatar";
+import { AvatarComponent } from "@/app/(protected)/_components/avatar";
 import { ProfileDrawer } from "./profile-drawer";
 
 interface HeaderProps {
