@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 
 		return NextResponse.json(updatedUser, { status: 200 });
 	} catch (error: any) {
-		console.error(error, 'ERROR SETTINGS');
+		console.error('Error in POST /api/settings: ', error);
 		return new NextResponse('Internal Server Error.', { status: 500 });
 	}
 }

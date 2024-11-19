@@ -5,10 +5,12 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ExtendedUser } from "@/next-auth";
 import { AvatarComponent } from '../../_components/avatar';
+import { LoadingModal } from '../../_components/loading-modal';
 
 interface UserBoxProps {
     data: ExtendedUser;
 }
+
 const UserBox = ({ data }: UserBoxProps) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -28,22 +30,27 @@ const UserBox = ({ data }: UserBoxProps) => {
     }, [data, router]);
 
     return (
-        <div
-            onClick={handleClick}
-            className="w-full realtive flex items-center space-x-3 bg-white p-3 hover:bg-neutral-100
-                    rounded-lg transition cursor-pointer"
-        >
-            <AvatarComponent user={data} />
-            <div className='min-w-0 flex-1'>
-                <div className='focus:outline-none'>
-                    <div className='flex justify-between items-center mb-1'>
-                        <p className='text-md font-medium text-gray-900'>
-                            {data.name}
-                        </p>
+        <>
+            {isLoading && (
+                <LoadingModal />
+            )}
+            <div
+                onClick={handleClick}
+                className="w-full realtive flex items-center space-x-3 bg-white p-3 hover:bg-neutral-100
+                    rounded-lg transition cursor-pointer mt-2"
+            >
+                <AvatarComponent user={data} />
+                <div className='min-w-0 flex-1'>
+                    <div className='focus:outline-none'>
+                        <div className='flex justify-between items-center mb-1'>
+                            <p className='text-md font-medium text-gray-900'>
+                                {data.name}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 

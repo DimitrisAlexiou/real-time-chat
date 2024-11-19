@@ -39,7 +39,10 @@ export async function DELETE(
 
 		return NextResponse.json(deletedConversation, { status: 200 });
 	} catch (error: any) {
-		console.error(error, 'ERROR_CONVERSATION_DELETE');
+		console.error(
+			'Error in DELETE /api/conversations/:conversationId: ',
+			error
+		);
 		return new NextResponse('Internal Error', { status: 500 });
 	}
 }

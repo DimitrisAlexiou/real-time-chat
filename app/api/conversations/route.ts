@@ -22,8 +22,8 @@ export async function POST(request: Request) {
 					isGroup,
 					users: {
 						connect: [
-							...members.map((member: { value: string }) => ({
-								id: member.value,
+							...members.map((member: string) => ({
+								id: member,
 							})),
 							{
 								id: user.id,
@@ -81,6 +81,7 @@ export async function POST(request: Request) {
 
 		return NextResponse.json(newConversation, { status: 201 });
 	} catch (error: any) {
+		console.error('Error in POST /api/conversations: ', error);
 		return new NextResponse('Internal Server Error.', { status: 500 });
 	}
 }

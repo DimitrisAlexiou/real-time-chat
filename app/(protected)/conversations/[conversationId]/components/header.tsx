@@ -8,6 +8,7 @@ import { useOtherUser } from "@/hooks/use-other-user";
 import { HiChevronLeft, HiEllipsisHorizontal } from "react-icons/hi2";
 import { AvatarComponent } from "@/app/(protected)/_components/avatar";
 import { ProfileDrawer } from "./profile-drawer";
+import { AvatarComponentGroup } from "@/app/(protected)/_components/avatar-group";
 
 interface HeaderProps {
     conversation: Conversation & {
@@ -40,7 +41,11 @@ export const Header = ({ conversation }: HeaderProps) => {
                     >
                         <HiChevronLeft size={32} />
                     </Link>
-                    <AvatarComponent user={otherUser} />
+                    {conversation.isGroup ? (
+                        <AvatarComponentGroup users={conversation.users} />
+                    ) : (
+                        <AvatarComponent user={otherUser} />
+                    )}
                     <div className="flex flex-col">
                         <div>
                             {conversation.name || otherUser.name}

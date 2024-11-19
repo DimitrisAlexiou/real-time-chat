@@ -53,7 +53,10 @@ export async function POST(request: Request, { params }: { params: Iparams }) {
 
 		return NextResponse.json(updatedMessage, { status: 200 });
 	} catch (error: any) {
-		console.log(error, 'Error messages seen');
+		console.error(
+			'Error in POST /api/conversations/:conversationId/seen: ',
+			error
+		);
 		return new NextResponse('Internal Server Error.', { status: 500 });
 	}
 }

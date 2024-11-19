@@ -8,13 +8,14 @@ import { format } from 'date-fns';
 import { ExtendedConversation } from "@/types/conversation";
 import { useOtherUser } from "@/hooks/use-other-user";
 import { AvatarComponent } from "../../_components/avatar";
+import { AvatarComponentGroup } from "../../_components/avatar-group";
 
 interface ConversationBoxProps {
     data: ExtendedConversation;
     selected?: boolean;
 }
 
-const ConversationBox = ({ data, selected }: ConversationBoxProps) => {
+export const ConversationBox = ({ data, selected }: ConversationBoxProps) => {
     const otherUser = useOtherUser(data);
     const session = useSession();
     const router = useRouter();
@@ -57,7 +58,12 @@ const ConversationBox = ({ data, selected }: ConversationBoxProps) => {
                 selected ? 'bg-neutral-100' : 'bg-white'
             )}
         >
-            <AvatarComponent user={otherUser} />
+            {data.isGroup ? (
+                <AvatarComponentGroup users={data.users} />
+
+            ) : (
+                <AvatarComponent user={otherUser} />
+            )}
             <div className='min-w-0 flex-1'>
                 <div className='focus:outline-none'>
                     <div className='flex justify-between items-center mb-1'>
@@ -78,5 +84,3 @@ const ConversationBox = ({ data, selected }: ConversationBoxProps) => {
         </div>
     )
 }
-
-export default ConversationBox;
