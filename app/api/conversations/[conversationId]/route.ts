@@ -1,6 +1,7 @@
-import { currentUser } from '@/lib/auth';
-import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
+import { currentUser } from '@/lib/auth';
+import { pusherServer } from '@/lib/pusher';
+import { db } from '@/lib/db';
 
 interface IParams {
 	conversationId?: string;
@@ -35,6 +36,15 @@ export async function DELETE(
 					hasSome: [user.id],
 				},
 			},
+		});
+
+		existingConversation.users.map((user) => {
+			if (user.email)
+				pusherServer.trigger(
+					user.email,
+					'conversation:remove',
+					existingConversation
+				);
 		});
 
 		return NextResponse.json(deletedConversation, { status: 200 });

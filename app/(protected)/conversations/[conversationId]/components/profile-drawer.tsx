@@ -11,6 +11,7 @@ import { AvatarComponent } from "@/app/(protected)/_components/avatar";
 import { ConfirmModal } from "./confirm-modal";
 import { AvatarComponentGroup } from "@/app/(protected)/_components/avatar-group";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { useIsActive } from "@/hooks/use-is-active";
 
 interface ProfileDrawerProps {
     data: Conversation & {
@@ -21,8 +22,9 @@ interface ProfileDrawerProps {
 }
 
 export const ProfileDrawer = ({ data, isOpen, onClose }: ProfileDrawerProps) => {
-    const otherUser = useOtherUser(data);
     const [confirmOpen, setIsConfirmOpen] = useState(false);
+    const otherUser = useOtherUser(data);
+    const isActive = useIsActive(otherUser?.email!);
 
     const joinedDate = useMemo(() => {
         return format(new Date(otherUser.createdAt), 'PP');
@@ -35,8 +37,8 @@ export const ProfileDrawer = ({ data, isOpen, onClose }: ProfileDrawerProps) => 
     const statusText = useMemo(() => {
         if (data.isGroup) return `${data.users.length} members`;
 
-        return 'Active';
-    }, [data]);
+        return isActive ? 'Active' : 'Offline';
+    }, [data, isActive]);
 
     return (
         <>

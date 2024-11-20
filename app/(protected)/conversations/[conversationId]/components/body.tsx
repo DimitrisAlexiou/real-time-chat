@@ -1,10 +1,12 @@
 'use client';
 
+import axios from "axios";
+import { find } from "lodash";
 import { useEffect, useRef, useState } from "react";
+import { pusherClient } from "@/lib/pusher";
 import { ExtendedMessage } from "@/types/conversation";
 import { MessageBox } from "./message-box";
 import useConversation from "@/hooks/use-conversation";
-import axios from "axios";
 
 interface BodyProps {
     initialMessages: ExtendedMessage[];
@@ -17,7 +19,42 @@ export const Body = ({ initialMessages }: BodyProps) => {
     const { conversationId } = useConversation();
 
     useEffect(() => {
-        axios.post(`/api/conversations/${conversationId}/seen`)
+        axios.post(`/api/conversations/${conversationId}/seen`);
+    }, [conversationId]);
+
+    useEffect(() => {
+        pusherClient.subscribe(conversationId);
+        bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
+
+        const messageHandler = (message: ExtendedMessage) => {
+            axios.post(`/api/conversations/${conversationId}/seen`);
+
+            setMessages((current) => {
+                if (find(current, { id: message.id }))
+                    return current;
+
+                return [...current, message];
+            });
+            bottomRef?.current?.scrollIntoView({ behavior: "smooth" });
+        };
+
+        const updateMessageHandler = (newMessage: ExtendedMessage) => {
+            setMessages((current) => current.map((currentMessage) => {
+                if (currentMessage.id === newMessage.id)
+                    return newMessage;
+
+                return currentMessage;
+            }));
+        };
+
+        pusherClient.bind("messages:new", messageHandler);
+        pusherClient.bind("message:update", updateMessageHandler);
+
+        return () => {
+            pusherClient.unsubscribe(conversationId);
+            pusherClient.unbind("messages:new", messageHandler);
+            pusherClient.unbind("message:update", updateMessageHandler);
+        };
     }, [conversationId]);
 
     return (

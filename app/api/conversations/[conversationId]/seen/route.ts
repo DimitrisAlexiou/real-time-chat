@@ -1,5 +1,6 @@
 import { currentUser } from '@/lib/auth';
 import { db } from '@/lib/db';
+import { pusherServer } from '@/lib/pusher';
 import { NextResponse } from 'next/server';
 
 interface Iparams {
@@ -50,6 +51,20 @@ export async function POST(request: Request, { params }: { params: Iparams }) {
 				seen: true,
 			},
 		});
+
+		await pusherServer.trigger(user.email, 'conversation:update', {
+			id: conversationId,
+			messages: [updatedMessage],
+		});
+
+		if (lastMessage.seenIds.indexOf(user.id) !== -1)
+			return NextResponse.json(conversation);
+
+		await pusherServer.trigger(
+			conversationId!,
+			'message:update',
+			updatedMessage
+		);
 
 		return NextResponse.json(updatedMessage, { status: 200 });
 	} catch (error: any) {
