@@ -3,14 +3,17 @@ import { db } from '@/lib/db';
 import { pusherServer } from '@/lib/pusher';
 import { NextResponse } from 'next/server';
 
-interface Iparams {
+interface IParams {
 	conversationId?: string;
 }
 
-export async function POST(request: Request, { params }: { params: Iparams }) {
+export async function POST(
+	request: Request,
+	{ params }: { params: Promise<IParams> }
+) {
 	try {
 		const user = await currentUser();
-		const { conversationId } = params;
+		const { conversationId } = await params;
 
 		if (!user?.id || !user?.email)
 			return new NextResponse('Unauthorized', { status: 401 });
