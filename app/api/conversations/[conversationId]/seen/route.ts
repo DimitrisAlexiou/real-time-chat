@@ -10,7 +10,7 @@ interface Iparams {
 export async function POST(request: Request, { params }: { params: Iparams }) {
 	try {
 		const user = await currentUser();
-		const { conversationId } = await params;
+		const { conversationId } = params;
 
 		if (!user?.id || !user?.email)
 			return new NextResponse('Unauthorized', { status: 401 });
